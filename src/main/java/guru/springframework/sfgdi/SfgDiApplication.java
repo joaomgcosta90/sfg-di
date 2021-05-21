@@ -1,10 +1,14 @@
 package guru.springframework.sfgdi;
 
+import guru.springframework.sfgdi.configuration.SfgConfiguration;
 import guru.springframework.sfgdi.controllers.*;
+import guru.springframework.sfgdi.datasource.FakeDataSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.PropertySource;
 
+//@PropertySource("classpath:datasource.properties")
 @SpringBootApplication
 public class SfgDiApplication {
 
@@ -33,6 +37,20 @@ public class SfgDiApplication {
 		System.out.println("--------- Constructor Injected Controller");
 		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
 		System.out.println(constructorInjectedController.getGreetings());
+
+		System.out.println("--------- Fake Data Source");
+		FakeDataSource fakeDataSource = (FakeDataSource) ctx.getBean("fakeDataSource");
+		System.out.println(fakeDataSource.getUserName());
+		System.out.println(fakeDataSource.getPassword());
+		System.out.println(fakeDataSource.getJdbcurl());
+
+
+		System.out.println("--------- Config Props Bean");
+		SfgConfiguration sfgConfiguration = (SfgConfiguration) ctx.getBean("sfgConfiguration");
+		System.out.println(sfgConfiguration.getUserName());
+		System.out.println(sfgConfiguration.getPassword());
+		System.out.println(sfgConfiguration.getJdbcurl());
+
 
 
 	}
